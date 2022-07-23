@@ -11,11 +11,11 @@ class QueProcess extends EventEmitter {
         const newId = ++this.id
         this.prcs.push({id : newId, fun, input});
         return new Promise((resolve, reject) => {
-            this.exec();
             this.once(newId, data => {
                 if(data.code === 200) return resolve(data.res);
                 if(data.code === 400) return reject(data.err);
             })
+            this.exec();
         })
     }
 
